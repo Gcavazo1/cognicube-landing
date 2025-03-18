@@ -1,0 +1,32 @@
+# Cursor Rules for CogniCube Landing Page
+
+# Include core project files
+include:
+  - "src/**/*.{js,jsx,ts,tsx,glsl,frag,vert}"
+  - "*.{js,jsx,ts,tsx,json,html}"
+
+# Exclude build and node_modules
+exclude:
+  - "dist/**/*"
+  - "node_modules/**/*"
+  - "*.lock"
+
+# GLSL shader specific rules
+glsl:
+  indent: 2
+  brackets: true
+
+# JavaScript/React rules
+javascript:
+  indent: 2
+  semicolons: true
+  quotes: single
+  trailingComma: es5
+
+# Format on save
+formatOnSave: true
+
+# Enable WebGL analysis
+webgl:
+  enabled: true
+  shaderAnalysis: true 
