@@ -1,6 +1,20 @@
-# React + Vite
+# CogniCube Landing Page
+
+A cyberpunk-styled landing page mockup for CogniCube, built with React and Vite.
+
+## About This Project
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+## Technologies Used
+
+- React 19
+- Vite
+- Framer Motion for animations
+- Three.js for 3D effects
+- Custom GLSL shaders
+
+## Development
 
 Currently, two official plugins are available:
 
