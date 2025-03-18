@@ -234,6 +234,40 @@ const addStyles = () => {
         box-shadow: 0 0 0 0 ${CYBERPUNK_COLORS.neonCyan}00;
       }
     }
+    
+    /* Mobile responsiveness - hide canvas on smaller screens */
+    @media (max-width: 768px) {
+      .neural-network-container {
+        display: none !important;
+      }
+      
+      .hero-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 20px !important;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      
+      .hero-title {
+        font-size: 2.5rem !important;
+        text-align: center !important;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.2rem !important;
+        text-align: center !important;
+      }
+      
+      .hero-button-group {
+        flex-direction: column !important;
+        align-items: center !important;
+      }
+      
+      .hero-section {
+        padding: 80px 20px 40px !important;
+      }
+    }
   `;
   document.head.appendChild(styleEl);
   return () => {
@@ -247,10 +281,29 @@ const HeroSection = () => {
   const canvasRef = useRef(null);
   const neuronsRef = useRef(null);
   const [animate, setAnimate] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   // Add CSS styles
   useEffect(() => {
     return addStyles();
+  }, []);
+  
+  // Check for mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) || window.innerWidth < 768;
+    };
+    
+    setIsMobile(checkMobile());
+    
+    const handleResize = () => {
+      setIsMobile(checkMobile());
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
   
   // Cyberpunk circuit animation effect

@@ -24,6 +24,7 @@ function App() {
   const [mainContentReady, setMainContentReady] = useState(false);
   const [transitionComplete, setTransitionComplete] = useState(false);
   const [transitionInProgress, setTransitionInProgress] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   useEffect(() => {
     // Add global styles directly
@@ -157,6 +158,37 @@ function App() {
       document.body.style.overflow = 'auto';
     }, 800); // Shorter delay for smoother transition
   };
+  
+  // Mobile device detection
+  useEffect(() => {
+    const checkMobile = () => {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) || window.innerWidth < 768;
+    };
+    
+    const mobileDetected = checkMobile();
+    setIsMobile(mobileDetected);
+    
+    // Skip loading animation for mobile devices
+    if (mobileDetected) {
+      setLoading(false);
+      setMainContentReady(true);
+      setTransitionComplete(true);
+      
+      // Make document scrollable on mobile
+      document.documentElement.style.overflow = 'auto';
+      document.body.style.overflow = 'auto';
+    }
+    
+    // Handle window resize for responsive design
+    const handleResize = () => {
+      setIsMobile(checkMobile());
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   return (
     <>
